@@ -4,9 +4,20 @@ const utils = require('../../utils/index');
 
 const readFromFile = async (address) => fs.promises.readFile(path.resolve(__dirname, address), 'utf-8');
 
-const getFilms = async () => {
+const getFilmsDBAsJSON = async () => {
   const fetchedFile = await readFromFile('../../files/db.json');
   return utils.parseJsonAsync(fetchedFile);
 };
 
-exports.getFilms = getFilms;
+const getFilmsGenres = async () => {
+  const filmsJSON = await getFilmsDBAsJSON();
+  return filmsJSON.genres;
+};
+
+const getFilmsList = async () => {
+  const filmsJSON = await getFilmsDBAsJSON();
+  return filmsJSON.movies;
+};
+
+exports.getFilmsGenres = getFilmsGenres;
+exports.getFilmsList = getFilmsList;
