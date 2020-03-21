@@ -5,7 +5,9 @@ const app = express();
 
 app.use('/film', film);
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', (req, res) => {
+  return res.send('Hello World!');
+});
 
 const errorHandler = (req, res, next, err) => {
   res.status(500);
