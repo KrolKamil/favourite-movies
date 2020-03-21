@@ -1,8 +1,10 @@
 const express = require('express');
-const router = express.Router();
 const files = require('../../services/files/index');
+const middlewares = require('./middlewares');
 
-router.get('/', async (req, res) => {
+const router = express.Router();
+
+router.get('/', middlewares.validateNewTask, async (req, res) => {
   try {
     const filesDb = await files.getFilms();
     return res.status(200).send(filesDb);
