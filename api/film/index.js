@@ -18,10 +18,12 @@ router.post('/',
   middlewares.validateNewFilmGenresAndAppendFilmsDBToReq,
   async (req, res) => {
     try {
+      console.log('test');
+      console.log(req.body);
       req.body.id = ++req.filmsDB.movies.length;
       req.filmsDB.movies.push(req.body);
-      await files.saveFilmsDB(req.filmsDB.movies);
-      return res.status(200).send('ok');
+      await files.saveFilmsDB(req.filmsDB);
+      return res.status(200).send(req.filmsDB);
     } catch (e) {
       return res.status(500).send('Internal Server Error');
     }
