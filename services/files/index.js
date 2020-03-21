@@ -9,15 +9,4 @@ const getFilmsDBAsJSON = async () => {
   return utils.parseJsonAsync(fetchedFile);
 };
 
-const getFilmsGenres = async () => {
-  const filmsJSON = await getFilmsDBAsJSON();
-  return filmsJSON.genres;
-};
-
-const getFilmsList = async () => {
-  const filmsJSON = await getFilmsDBAsJSON();
-  return filmsJSON.movies;
-};
-
-exports.getFilmsGenres = getFilmsGenres;
-exports.getFilmsList = getFilmsList;
+exports.getFilmsDBAsJSON = getFilmsDBAsJSON;

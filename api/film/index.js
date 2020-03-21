@@ -13,10 +13,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', middlewares.validateNewTask, (req, res) => {
-  console.log(req.body);
-  return res.status(200).send(req.body);
-});
+router.post('/',
+  middlewares.validateNewTask,
+  middlewares.validateNewTaskGenresAndSaveIndexOfNewFile,
+  (req, res) => {
+    console.log(req.body);
+    return res.status(200).send(req.body);
+  });
 
 router.get('/random', (req, res) => {
 
