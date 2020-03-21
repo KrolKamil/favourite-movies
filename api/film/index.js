@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log(req);
-  return res.status(200).send(req);
+  console.log(req.body);
+  return res.status(200).send(req.body);
 });
 
 router.get('/random', (req, res) => {
