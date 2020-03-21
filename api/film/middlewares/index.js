@@ -1,7 +1,6 @@
 const validators = require('../../../services/validators');
 const files = require('../../../services/files');
 const utils = require('../../../utils');
-const filmUtils = require('../../../services/film-utils');
 
 const validateNewTask = async (req, res, next) => {
   try {
