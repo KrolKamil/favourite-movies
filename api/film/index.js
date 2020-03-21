@@ -15,10 +15,16 @@ router.get('/', async (req, res) => {
 
 router.post('/',
   middlewares.validateNewTask,
-  middlewares.validateNewTaskGenresAndSaveIndexOfNewFile,
-  (req, res) => {
-    console.log(req.body);
-    return res.status(200).send(req.body);
+  middlewares.validateNewFilmGenresAndAppendFilmsDBToReq,
+  async (req, res) => {
+    try {
+      req.body.id = ++req.filmsDB.movies.length;
+      req.filmsDB.movies.push(req.body);
+      await files.saveFilmsDB(req.filmsDB.movies);
+      return res.status(200).send('ok');
+    } catch (e) {
+      return res.status(500).send('Internal Server Error');
+    }
   });
 
 router.get('/random', (req, res) => {

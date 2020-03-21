@@ -4,20 +4,21 @@ const utils = require('../../../utils');
 
 const validateNewTask = async (req, res, next) => {
   try {
-    await validators.taskAdd(req.body);
+    const x = await validators.taskAdd(req.body);
+    console.log(x);
     next();
   } catch (e) {
     return res.status(400).send(e.message);
   }
 };
 
-const validateNewTaskGenresAndSaveIndexOfNewFile = async (req, res, next) => {
+const validateNewFilmGenresAndAppendFilmsDBToReq = async (req, res, next) => {
   try {
     const filmsDBasJSON = await files.getFilmsDBAsJSON();
     if (!utils.arrayContainsArray(filmsDBasJSON.genres, req.body.genres)) {
       return res.status(400).send('Genres do not contain proper values');
     }
-    req.newFilmId = ++filmsDBasJSON.movies.length;
+    req.filmsDB = filmsDBasJSON;
     next();
   } catch (e) {
     return res.status(500).send('Internal Server Error');
@@ -25,4 +26,4 @@ const validateNewTaskGenresAndSaveIndexOfNewFile = async (req, res, next) => {
 };
 
 exports.validateNewTask = validateNewTask;
-exports.validateNewTaskGenresAndSaveIndexOfNewFile = validateNewTaskGenresAndSaveIndexOfNewFile;
+exports.validateNewFilmGenresAndAppendFilmsDBToReq = validateNewFilmGenresAndAppendFilmsDBToReq;
