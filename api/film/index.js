@@ -4,7 +4,7 @@ const middlewares = require('./middlewares');
 
 const router = express.Router();
 
-router.get('/', middlewares.validateNewTask, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const filesDb = await files.getFilms();
     return res.status(200).send(filesDb);
@@ -13,7 +13,7 @@ router.get('/', middlewares.validateNewTask, async (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/', middlewares.validateNewTask, (req, res) => {
   console.log(req.body);
   return res.status(200).send(req.body);
 });
