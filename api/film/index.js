@@ -24,8 +24,10 @@ router.post('/',
     }
   });
 
-router.get('/random', (req, res) => {
-
-});
+router.post('/random',
+  middlewares.validateRandomFilm,
+  (req, res) => {
+    return res.status(200).send('OK');
+  });
 
 module.exports = router;

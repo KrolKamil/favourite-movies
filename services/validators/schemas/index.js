@@ -1,7 +1,7 @@
 const Joi = require('@hapi/joi');
 
 const addFilm = Joi.object({
-  genres: Joi.array(),
+  genres: Joi.array().items(Joi.string()).unique(),
   title: Joi.string().min(1).max(30).required(),
   year: Joi.number().required(),
   runtime: Joi.number().required(),
@@ -12,7 +12,8 @@ const addFilm = Joi.object({
 });
 
 const randomFilm = Joi.object({
-
+  genres: Joi.array().items(Joi.string()).optional(),
+  duration: Joi.number().min(1).optional()
 });
 
 exports.addFilm = addFilm;

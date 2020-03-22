@@ -13,7 +13,7 @@ const validateNewFilm = async (req, res, next) => {
 const validateNewFilmGenresAndAppendFilmsDBToReq = async (req, res, next) => {
   try {
     const filmsDBasJSON = await files.getFilmsDBAsJSON();
-    if (!validators.validateGenres(filmsDBasJSON.genres, req.body.genres)) {
+    if (!validators.genres(filmsDBasJSON.genres, req.body.genres)) {
       return res.status(400).send('Genres do not contain proper values');
     }
     req.filmsDB = filmsDBasJSON;
@@ -23,8 +23,13 @@ const validateNewFilmGenresAndAppendFilmsDBToReq = async (req, res, next) => {
   }
 };
 
-const validateRandomFilmAndAppendFilmsDBToReq = (req, res, next) => {
-
+const validateRandomFilmAndAppendFilmsDBToReq = async (req, res, next) => {
+  try {
+    await validators.randomFilm(req.body);
+    next();
+  } catch (e) {
+    return res.status(400).send(e.message);
+  }
 };
 
 exports.validateNewFilm = validateNewFilm;

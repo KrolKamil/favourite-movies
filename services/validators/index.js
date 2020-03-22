@@ -5,9 +5,14 @@ const newFilm = async (film) => {
   return schemas.addFilm.validateAsync(film);
 };
 
-const validateGenres = async (allGenres, genresToCheck) => {
+const genres = async (allGenres, genresToCheck) => {
   return utils.arrayContainsArray(allGenres, genresToCheck);
 };
 
+const randomFilm = async (parameters) => {
+  return schemas.randomFilm.validateAsync(parameters);
+};
+
 exports.newFilm = newFilm;
-exports.validateGenres = validateGenres;
+exports.genres = genres;
+exports.randomFilm = randomFilm;
