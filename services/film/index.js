@@ -12,4 +12,21 @@ const getNewFilmId = (filmsDB) => {
   return newFilmId;
 };
 
+const getRandomFilm = (filmsDB, payload) => {
+
+};
+
+const getSingleRandomFilm = () => {
+
+};
+
+const getRandomFilmByDurration = () => {
+
+};
+
+const getRandomFilmByGenres = () => {
+
+};
+
 exports.addNewFilmToFilmsDB = addNewFilmToFilmsDB;
+exports.getRandomFilm = getRandomFilm;
