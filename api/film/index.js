@@ -18,10 +18,11 @@ router.post('/',
   middlewares.validateNewFilmGenresAndAppendFilmsDBToReq,
   async (req, res) => {
     try {
-      console.log('test');
-      console.log(req.body);
-      req.body.id = ++req.filmsDB.movies.length;
-      req.filmsDB.movies.push(req.body);
+      const newFilm = req.body;
+      let newFilmId = req.filmsDB.movies.length;
+      newFilmId++;
+      newFilm.id = newFilmId;
+      req.filmsDB.movies.push(newFilm);
       await files.saveFilmsDB(req.filmsDB);
       return res.status(200).send(req.filmsDB);
     } catch (e) {
