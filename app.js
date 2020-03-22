@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   return res.send('Hello World!');
 });
 
-const errorHandler = (req, res, next, err) => {
+const errorHandler = (err, req, res, next) => {
   res.status(500);
   res.send({ error: 'Internal Server Error' });
 };
