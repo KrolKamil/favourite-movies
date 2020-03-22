@@ -31,7 +31,6 @@ router.post('/random',
   middlewares.checkIfFilmGenresValidationIsNecessary,
   middlewares.validateFilmGenres,
   (req, res) => {
-    console.log('hi');
     return res.status(200).send('OK');
   });
 

@@ -3,9 +3,7 @@ const files = require('../../../services/files');
 
 const preValidateNewFilm = async (req, res, next) => {
   try {
-    console.log('1');
     await validators.newFilm(req.body);
-    console.log('2');
     next();
   } catch (e) {
     return res.status(400).send(e.message);
@@ -14,11 +12,10 @@ const preValidateNewFilm = async (req, res, next) => {
 
 const validateFilmGenres = async (req, res, next) => {
   try {
-    console.log('5');
-    if (await !validators.genres(req.filmsDB.genres, req.body.genres)) {
+    const requestGenresValid = await validators.genres(req.filmsDB.genres, req.body.genres);
+    if (!requestGenresValid) {
       return res.status(400).send('Genres do not contain proper values');
     }
-    console.log('6');
     next();
   } catch (e) {
     return res.status(500).send('Internal Server Error');
@@ -36,10 +33,8 @@ const preValidateRandomFilm = async (req, res, next) => {
 
 const appendFilmsDBToRequest = async (req, res, next) => {
   try {
-    console.log('3');
     const filmsDBAsJson = await files.getFilmsDBAsJSON();
     req.filmsDB = filmsDBAsJson;
-    console.log('4');
     next();
   } catch (e) {
     return res.status(500).send('Internal Server Error');
