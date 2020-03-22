@@ -15,5 +15,10 @@ const arrayContainsArray = (superset, subset) => {
   });
 };
 
+const getRandomNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
 exports.parseJsonAsync = parseJsonAsync;
 exports.arrayContainsArray = arrayContainsArray;
+exports.getRandomNumber = getRandomNumber;
