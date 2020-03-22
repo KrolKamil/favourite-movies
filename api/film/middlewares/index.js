@@ -23,10 +23,10 @@ const validateNewFilmGenresAndAppendFilmsDBToReq = async (req, res, next) => {
   }
 };
 
-const validateRandomFilm = () => {
+const validateRandomFilmAndAppendFilmsDBToReq = (req, res, next) => {
 
 };
 
 exports.validateNewFilm = validateNewFilm;
 exports.validateNewFilmGenresAndAppendFilmsDBToReq = validateNewFilmGenresAndAppendFilmsDBToReq;
-exports.validateRandomFilm = validateRandomFilm;
+exports.validateRandomFilm = validateRandomFilmAndAppendFilmsDBToReq;
