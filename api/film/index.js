@@ -30,7 +30,8 @@ router.post('/random',
   middlewares.appendFilmsDBToRequest,
   middlewares.validateFilmGenres(true),
   (req, res) => {
-    return res.status(200).send('OK');
+    const randomFilms = film.getRandomFilm(req.filmsDB.movies, req.body);
+    return res.status(200).send(randomFilms);
   });
 
 module.exports = router;

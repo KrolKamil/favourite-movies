@@ -23,8 +23,9 @@ const getRandomFilmByDurration = (films, durration) => {
   const minDurration = durration - 10;
   const maxDurration = durration + 10;
   const filmsWithSpecifiedDurration = films.filter((film) => {
-    return ((film.durration >= minDurration) && (film.duration <= maxDurration));
+    return ((film.runtime >= minDurration) && (film.runtime <= maxDurration));
   });
+  console.length(filmsWithSpecifiedDurration.length);
   return getSingleRandomFilm(filmsWithSpecifiedDurration);
 };
 
