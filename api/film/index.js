@@ -29,7 +29,6 @@ router.post('/random',
   middlewares.preValidateRandomFilm,
   middlewares.appendFilmsDBToRequest,
   middlewares.validateFilmGenres(true),
-  middlewares.validateFilmGenres,
   (req, res) => {
     return res.status(200).send('OK');
   });

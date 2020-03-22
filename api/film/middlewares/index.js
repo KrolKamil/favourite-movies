@@ -32,7 +32,7 @@ const appendFilmsDBToRequest = async (req, res, next) => {
 const validateFilmGenres = (validWithoutGenres) => async (req, res, next) => {
   if (validWithoutGenres === true) {
     if (!req.body.genres) {
-      next();
+      return next();
     }
   }
   const requestGenresValid = await validators.genres(req.filmsDB.genres, req.body.genres);
