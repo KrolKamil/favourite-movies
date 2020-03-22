@@ -1,29 +1,31 @@
 const validators = require('../../../services/validators');
 const files = require('../../../services/files');
 
-const validateNewFilm = async (req, res, next) => {
+const preValidateNewFilm = async (req, res, next) => {
   try {
+    console.log('1');
     await validators.newFilm(req.body);
+    console.log('2');
     next();
   } catch (e) {
     return res.status(400).send(e.message);
   }
 };
 
-const validateNewFilmGenresAndAppendFilmsDBToReq = async (req, res, next) => {
+const validateFilmGenres = async (req, res, next) => {
   try {
-    const filmsDBasJSON = await files.getFilmsDBAsJSON();
-    if (!validators.genres(filmsDBasJSON.genres, req.body.genres)) {
+    console.log('5');
+    if (await !validators.genres(req.filmsDB.genres, req.body.genres)) {
       return res.status(400).send('Genres do not contain proper values');
     }
-    req.filmsDB = filmsDBasJSON;
+    console.log('6');
     next();
   } catch (e) {
     return res.status(500).send('Internal Server Error');
   }
 };
 
-const validateRandomFilmAndAppendFilmsDBToReq = async (req, res, next) => {
+const preValidateRandomFilm = async (req, res, next) => {
   try {
     await validators.randomFilm(req.body);
     next();
@@ -32,6 +34,27 @@ const validateRandomFilmAndAppendFilmsDBToReq = async (req, res, next) => {
   }
 };
 
-exports.validateNewFilm = validateNewFilm;
-exports.validateNewFilmGenresAndAppendFilmsDBToReq = validateNewFilmGenresAndAppendFilmsDBToReq;
-exports.validateRandomFilm = validateRandomFilmAndAppendFilmsDBToReq;
+const appendFilmsDBToRequest = async (req, res, next) => {
+  try {
+    console.log('3');
+    const filmsDBAsJson = await files.getFilmsDBAsJSON();
+    req.filmsDB = filmsDBAsJson;
+    console.log('4');
+    next();
+  } catch (e) {
+    return res.status(500).send('Internal Server Error');
+  }
+};
+
+const checkIfFilmGenresValidationIsNecessary = async (req, res, next) => {
+  if (req.body.genres) {
+    next();
+  }
+  next('route');
+};
+
+exports.preValidateNewFilm = preValidateNewFilm;
+exports.validateFilmGenres = validateFilmGenres;
+exports.preValidateRandomFilm = preValidateRandomFilm;
+exports.appendFilmsDBToRequest = appendFilmsDBToRequest;
+exports.checkIfFilmGenresValidationIsNecessary = checkIfFilmGenresValidationIsNecessary;

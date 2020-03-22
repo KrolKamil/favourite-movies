@@ -13,8 +13,9 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/',
-  middlewares.validateNewFilm,
-  middlewares.validateNewFilmGenresAndAppendFilmsDBToReq,
+  middlewares.preValidateNewFilm,
+  middlewares.appendFilmsDBToRequest,
+  middlewares.validateFilmGenres,
   async (req, res) => {
     try {
       await film.addNewFilmToFilmsDB(req.body, req.filmsDB);
@@ -25,8 +26,12 @@ router.post('/',
   });
 
 router.post('/random',
-  middlewares.validateRandomFilm,
+  middlewares.preValidateRandomFilm,
+  middlewares.appendFilmsDBToRequest,
+  middlewares.checkIfFilmGenresValidationIsNecessary,
+  middlewares.validateFilmGenres,
   (req, res) => {
+    console.log('hi');
     return res.status(200).send('OK');
   });
 
