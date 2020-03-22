@@ -4,8 +4,7 @@ const utils = require('../../../utils');
 
 const validateNewTask = async (req, res, next) => {
   try {
-    const x = await validators.taskAdd(req.body);
-    console.log(x);
+    await validators.taskAdd(req.body);
     next();
   } catch (e) {
     return res.status(400).send(e.message);
