@@ -1,10 +1,9 @@
 const validators = require('../../../services/validators');
 const files = require('../../../services/files');
-const utils = require('../../../utils');
 
-const validateNewTask = async (req, res, next) => {
+const validateNewFilm = async (req, res, next) => {
   try {
-    await validators.taskAdd(req.body);
+    await validators.newFilm(req.body);
     next();
   } catch (e) {
     return res.status(400).send(e.message);
@@ -14,7 +13,7 @@ const validateNewTask = async (req, res, next) => {
 const validateNewFilmGenresAndAppendFilmsDBToReq = async (req, res, next) => {
   try {
     const filmsDBasJSON = await files.getFilmsDBAsJSON();
-    if (!utils.arrayContainsArray(filmsDBasJSON.genres, req.body.genres)) {
+    if (!validators.validateGenres(filmsDBasJSON.genres, req.body.genres)) {
       return res.status(400).send('Genres do not contain proper values');
     }
     req.filmsDB = filmsDBasJSON;
@@ -24,5 +23,10 @@ const validateNewFilmGenresAndAppendFilmsDBToReq = async (req, res, next) => {
   }
 };
 
-exports.validateNewTask = validateNewTask;
+const validateRandomFilm = () => {
+
+};
+
+exports.validateNewFilm = validateNewFilm;
 exports.validateNewFilmGenresAndAppendFilmsDBToReq = validateNewFilmGenresAndAppendFilmsDBToReq;
+exports.validateRandomFilm = validateRandomFilm;

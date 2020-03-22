@@ -1,7 +1,13 @@
 const schemas = require('./schemas');
+const utils = require('../../utils');
 
-const taskAdd = async (film) => {
+const newFilm = async (film) => {
   return schemas.addFilm.validateAsync(film);
 };
 
-exports.taskAdd = taskAdd;
+const validateGenres = async (allGenres, genresToCheck) => {
+  return utils.arrayContainsArray(allGenres, genresToCheck);
+};
+
+exports.newFilm = newFilm;
+exports.validateGenres = validateGenres;

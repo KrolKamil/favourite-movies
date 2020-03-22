@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/',
-  middlewares.validateNewTask,
+  middlewares.validateNewFilm,
   middlewares.validateNewFilmGenresAndAppendFilmsDBToReq,
   async (req, res) => {
     try {
