@@ -10,18 +10,6 @@ const preValidateNewFilm = async (req, res, next) => {
   }
 };
 
-const validateFilmGenres = async (req, res, next) => {
-  try {
-    const requestGenresValid = await validators.genres(req.filmsDB.genres, req.body.genres);
-    if (!requestGenresValid) {
-      return res.status(400).send('Genres do not contain proper values');
-    }
-    next();
-  } catch (e) {
-    return res.status(500).send('Internal Server Error');
-  }
-};
-
 const preValidateRandomFilm = async (req, res, next) => {
   try {
     await validators.randomFilm(req.body);
@@ -41,15 +29,20 @@ const appendFilmsDBToRequest = async (req, res, next) => {
   }
 };
 
-const checkIfFilmGenresValidationIsNecessary = async (req, res, next) => {
-  if (req.body.genres) {
-    next();
+const validateFilmGenres = (validWithoutGenres) => async (req, res, next) => {
+  if (validWithoutGenres === true) {
+    if (!req.body.genres) {
+      next();
+    }
   }
-  next('route');
+  const requestGenresValid = await validators.genres(req.filmsDB.genres, req.body.genres);
+  if (!requestGenresValid) {
+    return res.status(400).send('Genres do not contain proper values');
+  }
+  next();
 };
 
 exports.preValidateNewFilm = preValidateNewFilm;
-exports.validateFilmGenres = validateFilmGenres;
 exports.preValidateRandomFilm = preValidateRandomFilm;
 exports.appendFilmsDBToRequest = appendFilmsDBToRequest;
-exports.checkIfFilmGenresValidationIsNecessary = checkIfFilmGenresValidationIsNecessary;
+exports.validateFilmGenres = validateFilmGenres;
