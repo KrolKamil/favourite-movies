@@ -13,7 +13,7 @@ const addFilm = Joi.object({
 
 const randomFilm = Joi.object({
   genres: Joi.array().items(Joi.string().required()).unique().optional(),
-  duration: Joi.number().min(1).optional()
+  duration: Joi.number().integer().min(1).optional().positive()
 });
 
 exports.addFilm = addFilm;

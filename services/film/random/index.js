@@ -18,12 +18,12 @@ const getSingleRandomFilm = (films) => {
 };
 
 const getRandomFilmByDurration = (films, durration) => {
-    const minDurration = durration - 10;
-    const maxDurration = durration + 10;
-    const filmsWithSpecifiedDurration = films.filter((film) => {
-      return ((film.runtime >= minDurration) && (film.runtime <= maxDurration));
-    });
-    return getSingleRandomFilm(filmsWithSpecifiedDurration);
+  const minDurration = durration - 10;
+  const maxDurration = durration + 10;
+  const filmsWithSpecifiedDurration = films.filter((film) => {
+    return ((film.runtime >= minDurration) && (film.runtime <= maxDurration));
+  });
+  return getSingleRandomFilm(filmsWithSpecifiedDurration);
 };
 
 const getRandomFilmByGenres = (films, genres) => {
@@ -37,8 +37,11 @@ const getRandomFilmByGenres = (films, genres) => {
       rootArray[countFilmValidGenres - 1].push(films[i]);
     }
   }
-  return rootArray.flat();
+  rootArray.reverse();
+  return flatSingleLevelArray(rootArray);
 };
+
+const flatSingleLevelArray = (arr) => [].concat(...arr);
 
 const countValidGenresInFilmGenres = (validGenres, filmGenres) => {
   let validGenresInFilmGenres = 0;
