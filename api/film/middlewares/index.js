@@ -10,6 +10,19 @@ const preValidateNewFilm = async (req, res, next) => {
   }
 };
 
+const parseNewFilmProperties = (req, res, next) => {
+  req.body.year = req.body.year.toString();
+  req.body.runtime = req.body.runtime.toString();
+  next();
+};
+
+const parseRandomFilmProperties = (req, res, next) => {
+  if (req.body.duration) {
+    req.body.duration = parseInt(req.body.duration);
+  }
+  next();
+};
+
 const preValidateRandomFilm = async (req, res, next) => {
   try {
     await validators.randomFilm(req.body);
@@ -46,3 +59,5 @@ exports.preValidateNewFilm = preValidateNewFilm;
 exports.preValidateRandomFilm = preValidateRandomFilm;
 exports.appendFilmsDBToRequest = appendFilmsDBToRequest;
 exports.validateFilmGenres = validateFilmGenres;
+exports.parseNewFilmProperties = parseNewFilmProperties;
+exports.parseRandomFilmProperties = parseRandomFilmProperties;
