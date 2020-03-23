@@ -1,7 +1,7 @@
 # SUPER SIMPLE DOCUMENTATION JUST FOR BASIC KNOWLEDGE OF API
 # Catalogue of favourite movies
 
-# TEST NOT PROVIDED
+# IMPORTANT: APP DO NOT CONTAIN UNIT TESTS
 
 Simple catalogue app with two functionalities:
  - add film
