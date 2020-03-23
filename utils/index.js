@@ -19,6 +19,9 @@ const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
+const flatSingleLevelArray = (arr) => [].concat(...arr);
+
+exports.flatSingleLevelArray = flatSingleLevelArray;
 exports.parseJsonAsync = parseJsonAsync;
 exports.arrayContainsArray = arrayContainsArray;
 exports.getRandomNumber = getRandomNumber;

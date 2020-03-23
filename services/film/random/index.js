@@ -1,4 +1,6 @@
-const utils = require('../../../utils');
+const getSingleRandomFilm = require('./single-random');
+const getRandomFilmByGenres = require('./genres');
+const getRandomFilmByDurration = require('./duration');
 
 const getRandomFilm = (films, payload) => {
   if (payload.genres && payload.duration) {
@@ -10,57 +12,6 @@ const getRandomFilm = (films, payload) => {
   } else {
     return getSingleRandomFilm(films);
   }
-};
-
-const getSingleRandomFilm = (films) => {
-  const randomFilmIndex = utils.getRandomNumber(1, films.length);
-  return films[randomFilmIndex - 1];
-};
-
-const getRandomFilmByDurration = (films, durration) => {
-  const minDurration = durration - 10;
-  const maxDurration = durration + 10;
-  const filmsWithSpecifiedDurration = films.filter((film) => {
-    return ((film.runtime >= minDurration) && (film.runtime <= maxDurration));
-  });
-  return getSingleRandomFilm(filmsWithSpecifiedDurration);
-};
-
-const getRandomFilmByGenres = (films, genres) => {
-  const rootArray = createArrayOfArrays(genres.length);
-  let i = 0;
-
-  let filmsLength = films.length;
-  for (i; i < filmsLength; i++) {
-    const countFilmValidGenres = countValidGenresInFilmGenres(genres, films[i].genres);
-    if (countFilmValidGenres > 0) {
-      rootArray[countFilmValidGenres - 1].push(films[i]);
-    }
-  }
-  rootArray.reverse();
-  return flatSingleLevelArray(rootArray);
-};
-
-const flatSingleLevelArray = (arr) => [].concat(...arr);
-
-const countValidGenresInFilmGenres = (validGenres, filmGenres) => {
-  let validGenresInFilmGenres = 0;
-  let i = 0;
-  for (i; i < filmGenres.length; i++) {
-    if (validGenres.indexOf(filmGenres[i]) >= 0) {
-      validGenresInFilmGenres++;
-    }
-  }
-  return validGenresInFilmGenres;
-};
-
-const createArrayOfArrays = (length) => {
-  const rootArray = [];
-  let i = 0;
-  for (i; i < length; i++) {
-    rootArray.push([]);
-  }
-  return rootArray;
 };
 
 module.exports = {
