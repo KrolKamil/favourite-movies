@@ -4,14 +4,6 @@ const film = require('../../services/film');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  try {
-    return res.status(200).send('hi');
-  } catch (e) {
-    return res.status(404).send(e.message);
-  }
-});
-
 router.post('/',
   middlewares.preValidateNewFilm,
   middlewares.appendFilmsDBToRequest,
@@ -19,7 +11,7 @@ router.post('/',
   async (req, res) => {
     try {
       await film.addNewFilmToFilmsDB(req.body, req.filmsDB);
-      return res.status(200).send(req.filmsDB);
+      return res.status(200).json({});
     } catch (e) {
       return res.status(500).send('Internal Server Error');
     }
@@ -31,7 +23,10 @@ router.post('/random',
   middlewares.validateFilmGenres(true),
   (req, res) => {
     const randomFilms = film.getRandomFilm(req.filmsDB.movies, req.body);
-    return res.status(200).send(randomFilms);
+    if (randomFilms === null) {
+      return res.status(404).json({ error: `can't find film with this credentials` });
+    }
+    return res.status(200).json(randomFilms);
   });
 
 module.exports = router;

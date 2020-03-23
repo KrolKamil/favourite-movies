@@ -8,12 +8,12 @@ app.use(bodyParser.json());
 app.use('/film', film);
 
 app.get('/', (req, res) => {
-  return res.send('Hello World!');
+  return res.send('on');
 });
 
 const errorHandler = (err, req, res, next) => {
   res.status(500);
-  res.send({ error: 'Internal Server Error' });
+  res.json({ error: 'Internal Server Error' });
 };
 
 app.use(errorHandler);

@@ -24,6 +24,14 @@ const countValidGenresInFilmGenres = (validGenres, filmGenres) => {
   return validGenresInFilmGenres;
 };
 
+const normalizeRandomFilmResponse = (films) => {
+  if (films.length === 0) {
+    return null;
+  }
+  return films;
+};
+
 exports.countValidGenresInFilmGenres = countValidGenresInFilmGenres;
 exports.createArrayOfArrays = createArrayOfArrays;
 exports.isValidDurationCreator = isValidDurationCreator;
+exports.normalizeRandomFilmResponse = normalizeRandomFilmResponse;

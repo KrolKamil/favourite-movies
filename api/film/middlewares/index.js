@@ -6,7 +6,7 @@ const preValidateNewFilm = async (req, res, next) => {
     await validators.newFilm(req.body);
     next();
   } catch (e) {
-    return res.status(400).send(e.message);
+    return res.status(400).json({ error: e.message });
   }
 };
 
@@ -15,7 +15,7 @@ const preValidateRandomFilm = async (req, res, next) => {
     await validators.randomFilm(req.body);
     next();
   } catch (e) {
-    return res.status(400).send(e.message);
+    return res.status(400).json({ error: e.message });
   }
 };
 
@@ -37,7 +37,7 @@ const validateFilmGenres = (validWithoutGenres) => async (req, res, next) => {
   }
   const requestGenresValid = await validators.genres(req.filmsDB.genres, req.body.genres);
   if (!requestGenresValid) {
-    return res.status(400).send('Genres do not contain proper values');
+    return res.status(400).json({ error: 'genres do not contain proper values' });
   }
   next();
 };
