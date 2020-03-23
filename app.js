@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.use('/film', film);
 
 app.get('/', (req, res) => {
-  return res.send('on');
+  return res.send('server is on');
 });
 
 const errorHandler = (err, req, res, next) => {
