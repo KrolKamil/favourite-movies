@@ -1,11 +1,11 @@
 # SUPER SIMPLE DOCUMENTATION JUST FOR BASIC KNOWLEDGE OF API
 # Catalogue of favourite movies
 
-# IMPORTANT: APP DO NOT CONTAIN UNIT TESTS
+# IMPORTANT: APP DOES NOT CONTAIN UNIT TESTS
 
-Simple catalogue app with two functionalities:
+The simple catalogue app with two functionalities:
  - add film
- - get random film by duration | genres
+ - get a random film by duration | genres
 
 ## Install
     npm install
@@ -24,7 +24,7 @@ All requests have to be JSON type.
 ### Request
 
 `POST /film/`
-    Add new film to db:
+    Add a new film to db:
     requirements:
     
 - a list of genres (only predefined ones from db file) (required, array of predefined strings)
@@ -57,11 +57,11 @@ example:
 ### Request
 
 `POST /film/random`
-    Get random film.
+    Get a random film.
     requirements:
     
- - genres: list of genres which should film contain (optional)
- -  duration: duration of film (optional)
+ - genres: a list of genres which film should contain (optional)
+ - duration: duration of film (optional)
 
 valid examples:
 duration and genres
@@ -98,4 +98,4 @@ nothing
 ### Response
     Valid: List of films compatible with request
     [film, film, ...],
-    Error: { error: `can't find film with this credentials` }
+    Error: { error: `can't find film with these features` }

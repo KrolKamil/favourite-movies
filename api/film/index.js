@@ -26,7 +26,7 @@ router.post('/random',
   (req, res) => {
     const randomFilms = film.getRandomFilm(req.filmsDB.movies, req.body);
     if (randomFilms === null) {
-      return res.status(404).json({ error: `can't find film with this credentials` });
+      return res.status(404).json({ error: `can't find film with these features` });
     }
     return res.status(200).json(randomFilms);
   });
