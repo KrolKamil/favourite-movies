@@ -11,7 +11,7 @@ const getRandomFilm = (films, payload) => {
     );
   } else if (payload.genres) {
     return randomFilmUtils.normalizeRandomFilmResponse(
-      [getRandomFilmByGenres(films, payload.genres)]
+      getRandomFilmByGenres(films, payload.genres)
     );
   } else if (payload.duration) {
     return randomFilmUtils.normalizeRandomFilmResponse(

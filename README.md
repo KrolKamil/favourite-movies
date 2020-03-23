@@ -1,7 +1,7 @@
 # SUPER SIMPLE DOCUMENTATION JUST FOR BASIC KNOWLEDGE OF API
 # Catalogue of favourite movies
 
-Simple catalogue app with two funcionalities:
+Simple catalogue app with two functionalities:
  - add film
  - get random film by duration | genres
 

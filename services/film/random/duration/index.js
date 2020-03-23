@@ -6,7 +6,10 @@ const getRandomFilmByDurration = (films, durration) => {
   const filmsWithSpecifiedDurration = films.filter((film) => {
     return isValidDurration(film.runtime);
   });
-  return getSingleRandomFilm(filmsWithSpecifiedDurration);
+  if (filmsWithSpecifiedDurration.length === 0) {
+    return filmsWithSpecifiedDurration;
+  }
+  return [getSingleRandomFilm(filmsWithSpecifiedDurration)];
 };
 
 module.exports = getRandomFilmByDurration;
