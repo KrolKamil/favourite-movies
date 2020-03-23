@@ -13,20 +13,17 @@ const getRandomFilm = (films, payload) => {
 };
 
 const getSingleRandomFilm = (films) => {
-  const randomFilmId = utils.getRandomNumber(1, films.length);
-  return films.find((film) => {
-    return film.id === randomFilmId;
-  });
+  const randomFilmIndex = utils.getRandomNumber(1, films.length);
+  return films[randomFilmIndex - 1];
 };
 
 const getRandomFilmByDurration = (films, durration) => {
-  const minDurration = durration - 10;
-  const maxDurration = durration + 10;
-  const filmsWithSpecifiedDurration = films.filter((film) => {
-    return ((film.runtime >= minDurration) && (film.runtime <= maxDurration));
-  });
-  console.length(filmsWithSpecifiedDurration.length);
-  return getSingleRandomFilm(filmsWithSpecifiedDurration);
+    const minDurration = durration - 10;
+    const maxDurration = durration + 10;
+    const filmsWithSpecifiedDurration = films.filter((film) => {
+      return ((film.runtime >= minDurration) && (film.runtime <= maxDurration));
+    });
+    return getSingleRandomFilm(filmsWithSpecifiedDurration);
 };
 
 const getRandomFilmByGenres = (films, genres) => {
