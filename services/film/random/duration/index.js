@@ -1,10 +1,10 @@
 const getSingleRandomFilm = require('../single-random');
+const randomFilmUtils = require('../utils');
 
 const getRandomFilmByDurration = (films, durration) => {
-  const minDurration = durration - 10;
-  const maxDurration = durration + 10;
+  const isValidDurration = randomFilmUtils.isValidDurationCreator(durration);
   const filmsWithSpecifiedDurration = films.filter((film) => {
-    return ((film.runtime >= minDurration) && (film.runtime <= maxDurration));
+    return isValidDurration(film.runtime);
   });
   return getSingleRandomFilm(filmsWithSpecifiedDurration);
 };
