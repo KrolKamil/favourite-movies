@@ -1,6 +1,9 @@
+# SUPER SIMPLE DOCUMENTATION JUST FOR BASIC KNOWLEDGE OF API
 # Catalogue of favourite movies
 
-Simple app for adding and geting random film.
+Simple catalogue app with two funcionalities:
+ - add film
+ - get random film by duration | genres
 
 ## Install
     npm install
@@ -10,18 +13,16 @@ Simple app for adding and geting random film.
 App runs on http://127.0.0.1:3000/
 # API
 All requests have to be JSON type.
-Mark `*` mean required filed.
 ### Request
 
 `GET /`
     Allow check if server works properly (except '/').
 ### Response
     server is on
-
 ### Request
 
 `POST /film/`
-    Adding new film to db:
+    Add new film to db:
     requirements:
     
 - a list of genres (only predefined ones from db file) (required, array of predefined strings)
@@ -51,3 +52,48 @@ example:
 ### Response
     Valid: {}
     Error: {error: "missing|invalid request properties"}
+### Request
+
+`POST /film/random`
+    Get random film.
+    requirements:
+    
+ - genres: list of genres which should film contain (optional)
+ -  duration: duration of film (optional)
+
+valid examples:
+duration and genres
+
+    {
+    	"duration": "100",
+    	"genres": [
+            "Drama",
+            "Romance",
+            "War"
+        ]   
+    }
+    
+duration
+
+    {
+    	"duration": "100"
+    }
+    
+genres
+
+    {
+    	"genres": [
+            "Drama",
+            "Romance",
+            "War"
+        ]
+    }
+
+nothing
+
+    {}
+    
+### Response
+    Valid: List of films compatible with request
+    [film, film, ...],
+    Error: { error: `can't find film with this credentials` }
